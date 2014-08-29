@@ -1,0 +1,15 @@
+{
+  "manifest_version": 2,
+
+  "name": "The Queue",
+  "description": "This extension allows you to easily store websites to view later.",
+  "version": "1.0",
+
+  "permissions": [
+    "tabs"
+  ],
+  "browser_action": {
+    "default_icon": "icon.png",
+    "default_popup": "popup.html"
+  }
+}
