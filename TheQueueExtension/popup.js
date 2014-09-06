@@ -1,17 +1,17 @@
 document.addEventListener('DOMContentLoaded', function () {
-  NATabTools.getTab(function (data) {
+  chrome.tabs.getSelected(function (tab) {
+    //tab: https://developer.chrome.com/extensions/tabs#type-Tab
 
     // updates the cookie and the UI with the specified queue
     var set_queue = function(queue) {
       var queue_as_string = JSON.stringify(queue);
       Cookies.set("queue", queue_as_string, { expires: 60 * 60 * 24 * 30 });
-      NAInterface.setWebList(queue.map(function (data) {
-        return data.title;
+      NAInterface.setWebList(queue.map(function (tab) {
+        return tab.title;
       }));
     };
 
-    // queue is a list of objects with 'url' and 'title' properties,
-    // ordered from oldest to newest
+    // queue is a list of tabs, ordered from oldest to newest
     var queue = Cookies.get("queue");
     if (queue === undefined) {
       queue = [];
@@ -23,12 +23,13 @@ document.addEventListener('DOMContentLoaded', function () {
     NAInterface.addPopListener(function() {
       current_item = queue.shift();
       set_queue(queue);
-      window.open(current_item.url);
+      chrome.tabs.create({url:current_item.url});
     });
 
     NAInterface.addPushListener(function() {
-      queue.push(data);
+      queue.push(tab);
       set_queue(queue);
+      chrome.tabs.remove(tab.id);
     });
   });
 });
