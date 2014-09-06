@@ -7,6 +7,14 @@
         min-width: 200px;
         overflow-x: hidden;
       }
+
+      button {
+        width:95px;
+      }
+
+      select {
+        width:200px;
+      }
     </style>
 
     <!--
@@ -15,12 +23,20 @@
       -
       - [1]: http://developer.chrome.com/extensions/contentSecurityPolicy.html
      -->
-     <p id="thisthing">thing one</p>
 
-     <script src="cookies.min.js"></script>
+    <!-- UI Elements -->
+    <button type="button" id="pop_btn">Pop</button>
+    <button type="button" id="push_btn">Push</button>
+    <br />
+    <select size="10" id="web_list"></select> 
 
-     <script src="tabtools.js"></script>
-     <script src="popup.js"></script>
+    <!-- External Libraries -->
+    <script src="cookies.min.js"></script>
+
+    <!-- Our Code -->
+    <script src="uiinterface.js"></script>
+    <script src="tabtools.js"></script>
+    <script src="popup.js"></script>
   </head>
   <body>
   </body>
