@@ -21,9 +21,11 @@ document.addEventListener('DOMContentLoaded', function () {
     set_queue(queue);
 
     NAInterface.addPopListener(function() {
-      current_item = queue.shift();
-      set_queue(queue);
-      chrome.tabs.create({url:current_item.url});
+      if (queue.length > 0) {
+        current_item = queue.shift();
+        set_queue(queue);
+        chrome.tabs.create({url:current_item.url});
+      }
     });
 
     NAInterface.addPushListener(function() {
